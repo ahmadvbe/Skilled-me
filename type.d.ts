@@ -1,3 +1,5 @@
+//1:46:30 type.d.ts : types definitions
+
 interface SkillRecord {
   id: string;
   title: string; // Write Code
