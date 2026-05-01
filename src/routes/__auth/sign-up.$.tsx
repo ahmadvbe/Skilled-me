@@ -5,7 +5,7 @@ export const Route = createFileRoute("/__auth/sign-up/$")({
 	component: RouteComponent,
 });
 
-function RouteComponent() {
+function RouteComponent() { //2:18:00
 	return (
 		<section id="sign-up">
 			<SignUp

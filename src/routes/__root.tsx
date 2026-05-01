@@ -1,4 +1,6 @@
+	//5 Add <ClerkProvider> to your app 2:14:20
 import { ClerkProvider, useUser } from "@clerk/tanstack-react-start";
+
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 import {

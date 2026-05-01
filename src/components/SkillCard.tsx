@@ -33,7 +33,7 @@ const SkillCard = ({
 
 	const handleCopy = async () => {
 		try {
-			await navigator.clipboard.writeText(installCommand);
+			await navigator.clipboard.writeText(installCommand); //await to see whether it has been copied properly 
 			setCopied(true);
 			setTimeout(() => setCopied(false), 2000);
 			// posthog.capture("install_command_copied", {
@@ -86,7 +86,7 @@ const SkillCard = ({
 								Ahmad
 							</p>
 							<p>
-								{createdAt //1:57:13
+								{createdAt //1:57:13 2:10:52 coderabbit fix
 									? new Date(createdAt).toLocaleDateString()
 									: "Unknown date"}
 							</p>

@@ -246,3 +246,25 @@ https://www.youtube.com/watch?v=Ua__7-x6MWs
         
 -        1:52:18 dive into the  
     *skill card component* 
+
+## 2:06:00 git push
+
+### 2:06:50 CodeRabbit
+
+    src/routeTree.gen.ts only defines the / route. This breaks typed navigation and creates dead links at runtime.
+
+
+## 2:11:40 Clerk
+    
+    Step 3 Set your Clerk API keys
+    Step 4 Add clerkMiddleware() to your app. 2:13:40
+clerkMiddleware() grants you access to user authentication state throughout your app. 
+    5 Add <ClerkProvider> to your app
+
+    2:15:49 create a custom sign in and sign up pages
+        src/routes/__auth/sign-in.$.tsx
+        src/routes/__auth/sign-up.$.tsx
+   *Splat Routes* 2:16:29 nd not regular signin sign out routes
+  -  2:18:16 modify the navbar so it actually points to these new pages
+
+  ### 2:21;00 PR and merge 
