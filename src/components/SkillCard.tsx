@@ -7,7 +7,7 @@ import {
 	Copy,
 	MessageSquare,
 } from "lucide-react";
-// import { usePostHog } from "";
+import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 
 // import type { GetSkillsData } from "#/dataconnect-generated";
@@ -27,20 +27,20 @@ const SkillCard = ({
 //SkillCardProps
 ) => {
 	const [copied, setCopied] = useState(false); //indication of successfull copy process 2:01:00
-	// const posthog = usePostHog();
+	const posthog = usePostHog();
 
 	const category = tags[0] ?? "General";
 
 	const handleCopy = async () => {
 		try {
-			await navigator.clipboard.writeText(installCommand); //await to see whether it has been copied properly 
+			await navigator.clipboard.writeText(installCommand); //await to see whether it has been copied properly
 			setCopied(true);
 			setTimeout(() => setCopied(false), 2000);
-			// posthog.capture("install_command_copied", {
-			// 	skill_title: title,
-			// 	skill_category: category,
-			// 	install_command: installCommand,
-			// });
+			posthog.capture("install_command_copied", { //2:26:55
+				skill_title: title,
+				skill_category: category,
+				install_command: installCommand,
+			});
 		} catch {
 			setCopied(false);
 		}
@@ -145,13 +145,12 @@ const SkillCard = ({
 							to="/skills"
 							className="open"
 							title={`Open ${title}`}
-							// onClick={
-							// 	() =>
-							// 	posthog.capture("skill_opened", {
-							// 		skill_title: title,
-							// 		skill_category: category,
-							// 	})
-							// }
+							onClick={() =>
+								posthog.capture("skill_opened", {
+									skill_title: title,
+									skill_category: category,
+								})
+							}
 						>
 							<span>Open</span>
 							<ArrowUpRight size={14} />

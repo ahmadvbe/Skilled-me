@@ -1,4 +1,4 @@
-	//5 Add <ClerkProvider> to your app 2:14:20
+//5 Add <ClerkProvider> to your app 2:14:20
 import { ClerkProvider, useUser } from "@clerk/tanstack-react-start";
 
 import { TanStackDevtools } from "@tanstack/react-devtools";
@@ -9,7 +9,7 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-// import { PostHogProvider, usePostHog } from "posthog-js/react";
+import { PostHogProvider, usePostHog } from "posthog-js/react";
 import { useEffect } from "react";
 import Crosshair from "#/components/Crosshair";
 import Navbar from "#/components/Navbar";
@@ -53,20 +53,21 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function PostHogUserIdentifier() {
 	const { user, isSignedIn } = useUser();
-	// const posthog = usePostHog();
+	const posthog = usePostHog();
 
 	useEffect(() => {
 		if (isSignedIn && user) {
-			// posthog.identify(user.id, {
-			// 	email: user.primaryEmailAddress?.emailAddress,
-			// 	name: user.fullName,
-			// });
+			posthog.identify(user.id, {
+				email: user.primaryEmailAddress?.emailAddress,
+				name: user.fullName,
+			});
+			posthog.capture("user_signed_in", {
+				user_id: user.id,
+			});
 		} else if (isSignedIn === false) {
-			// posthog.reset();
+			posthog.reset();
 		}
-	}, [isSignedIn, user, 
-		//posthog
-	]);
+	}, [isSignedIn, user, posthog]);
 
 	return null;
 }
@@ -79,8 +80,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body className="font-sans antialiased wrap-anywhere">
-				{/* <PostHogProvider
-					apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_PROJECT_TOKEN}
+				<PostHogProvider
+					apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_PROJECT_TOKEN ?? ""}
 					options={{
 						api_host: "/ingest",
 						ui_host:
@@ -90,23 +91,23 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 						capture_exceptions: true,
 						debug: import.meta.env.DEV,
 					}}
-				> */}
+				>
 					<ClerkProvider>
-						{/* <PostHogUserIdentifier /> */}
+						<PostHogUserIdentifier />
 						<div id="root-layout">
 							<header //1:31:30
-								>
+							>
 								<div className="frame">
-									<Navbar  //1:31:10
-										/>
-									<Crosshair  //1:35:33 for separation
+									<Navbar //1:31:10
+									/>
+									<Crosshair //1:35:33 for separation
 									/>
 									<Crosshair />
 								</div>
 							</header>
 
 							<main //1:31:45
-								>
+							>
 								<div className="frame">{children}</div>
 							</main>
 						</div>
@@ -124,7 +125,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 							]}
 						/>
 					</ClerkProvider>
-				{/* </PostHogProvider> */}
+				</PostHogProvider>
 				<Scripts />
 			</body>
 		</html>

@@ -267,4 +267,11 @@ clerkMiddleware() grants you access to user authentication state throughout your
    *Splat Routes* 2:16:29 nd not regular signin sign out routes
   -  2:18:16 modify the navbar so it actually points to these new pages
 
-  ### 2:21;00 PR and merge 
+  ### 2:21:00 PR and merge 
+
+  # 2:22:19 POSTHOG 
+    https://us.posthog.com/project/391419/dashboard/1493206
+     npx -y @posthog/wizard@latest
+     2:25:16 POSTHOG MCP server lets ur AI AGNET queries ur POSTHOG data direclty 
+        2:26:00 Events added
+    @:32:45 commit at github

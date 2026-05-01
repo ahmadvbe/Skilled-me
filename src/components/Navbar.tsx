@@ -2,10 +2,10 @@ import { Show, UserButton } from "@clerk/tanstack-react-start";
 import { Link } from "@tanstack/react-router";
 import { LogIn } from "lucide-react";
 
-// import { usePostHog } from "posthog-js/react";
+import { usePostHog } from "posthog-js/react";
 
 const Navbar = () => {
-	// const posthog = usePostHog();
+	const posthog = usePostHog();
 
 	return (
 		<nav className="navbar">
@@ -32,9 +32,7 @@ const Navbar = () => {
 					<Link
 						to="/sign-in/$" //it cant find the route when it finds it the error will disppear 1:34:30
 						className="btn-primary"
-						// onClick={() => 
-						// //	posthog.capture("sign_in_clicked")
-						// }
+						onClick={() => posthog.capture("sign_in_clicked")} //2:26:40
 					>
 						<LogIn //1:35:00 
 							size={16} />
