@@ -9,7 +9,10 @@ import {
 } from "lucide-react";
 // import { usePostHog } from "";
 import { useState } from "react";
+
 // import type { GetSkillsData } from "#/dataconnect-generated";
+
+//##        1:48:38 src/components/SkillCard.tsx
 
 // type SkillCardProps = GetSkillsData["skills"][number];
 
@@ -19,9 +22,11 @@ const SkillCard = ({
 	installCommand,
 	tags,
 	title,
-	author,
-}: SkillCardProps) => {
-	const [copied, setCopied] = useState(false);
+	// author,
+}: SkillRecord
+//SkillCardProps
+) => {
+	const [copied, setCopied] = useState(false); //indication of successfull copy process 2:01:00
 	// const posthog = usePostHog();
 
 	const category = tags[0] ?? "General";
@@ -41,14 +46,14 @@ const SkillCard = ({
 		}
 	};
 
-	return (
+	return ( //1:53:00
 		<article className="skill-card">
-			{/* <Link
+			<Link //1:54:00
 				to="/skills"
 				tabIndex={-1}
 				aria-label={`Open ${title}`}
 				className="overlay"
-			/> */}
+			/>
 
 			<div className="chrome">
 				<div className="chrome-bar">
@@ -61,28 +66,39 @@ const SkillCard = ({
 				</div>
 			</div>
 
-			<div className="body">
+			<div //1:55:48
+				className="body">
 				<div className="meta">
 					<div className="author">
 						<img
-							src={author.imageUrl || "/logo512.png"}
-							alt={`${author.username} avatar`}
+							src=//{author.imageUrl 
+								//||
+								 "/logo512.png"
+								//}
+							alt=//{`${author.username} 
+							'avatar'
+							//`}
 							className="avatar"
 						/>
 						<div className="author-copy">
-							<p>{author.username}</p>
 							<p>
-								{createdAt
+								{/* {author.username} */}
+								Ahmad
+							</p>
+							<p>
+								{createdAt //1:57:13
 									? new Date(createdAt).toLocaleDateString()
 									: "Unknown date"}
 							</p>
 						</div>
 					</div>
 
-					<p className="category">{category}</p>
+					<p //1:57:30
+						className="category">{category}</p>
 				</div>
 
-				<div className="summary">
+				<div 
+					className="summary">
 					<Link to="/skills" className="title-link">
 						<h3>{title}</h3>
 					</Link>
@@ -90,12 +106,14 @@ const SkillCard = ({
 					<p>{description}</p>
 				</div>
 
-				<div className="command">
+				<div //1:58:40
+					className="command">
 					<div className="command-copy">
 						<span>{">_"}</span>
 						<p>{installCommand}</p>
 					</div>
-					<button
+
+					<button //copy this to clipboard 1:59:30 -AI 1:59:50
 						type="button"
 						className="copy"
 						onClick={handleCopy}
@@ -105,34 +123,39 @@ const SkillCard = ({
 					</button>
 				</div>
 
-				<div className="footer">
+				<div //2:02:15
+					className="footer">
 					<div className="stats">
-						<button type="button" className="upvote" disabled>
+						<button type="button" 
+							className="upvote" disabled>
 							<ArrowBigUp size={16} fill="currentColor" />
 							<span>{tags.length}</span>
 						</button>
 
-						<div className="comments">
+						<div //2:03:10
+							className="comments">
 							<MessageSquare size={14} />
-							<span>{author.email ? 1 : 0}</span>
+							{/* <span>{author.email ? 1 : 0}</span> */}
 						</div>
 					</div>
 
-					<div className="actions">
-						{/* <Link
+					<div //2:03:45
+						className="actions">
+						<Link
 							to="/skills"
 							className="open"
 							title={`Open ${title}`}
-							onClick={() =>
-								posthog.capture("skill_opened", {
-									skill_title: title,
-									skill_category: category,
-								})
-							}
+							// onClick={
+							// 	() =>
+							// 	posthog.capture("skill_opened", {
+							// 		skill_title: title,
+							// 		skill_category: category,
+							// 	})
+							// }
 						>
 							<span>Open</span>
 							<ArrowUpRight size={14} />
-						</Link> */}
+						</Link>
 
 						<button
 							type="button"

@@ -228,3 +228,21 @@ https://www.youtube.com/watch?v=Ua__7-x6MWs
 # 1:36:40 Biome extension
 
 # SPEAK AI 1:37:30 WHISPER FLOW
+
+# Git save
+    1:40:45 switch over to a new branch 
+        git checkout -b dev
+
+# 1:41:15 Home PAGE
+        src/routes/index.tsx
+
+##        1:46:30 type.d.ts : types definitions
+                interface SkillRecord 
+
+##        1:48:38 src/components/SkillCard.tsx
+
+        Consume it/implement it at index.tsx
+        1:50:30 src/lib/dummy-skills.ts
+        
+-        1:52:18 dive into the  
+    *skill card component* 
