@@ -1,0 +1,14 @@
+# This is a file for you to write an un-named mutation. 
+# Only one un-named mutation is allowed per file.
+mutation {
+  skill_insert(
+    data: {id: "11111111222233334444555555555556",
+     authorClerkId: "user_3D8SHNjGx0wp9ng9BXOgijSejwh", createdAt: "2026-05-02T00:16:55.198Z",
+      description: "Generate clean TypeScript snippets and scaffold common app patterns."
+       installCommand: "npx skild add write-code",
+        promptConfig: "you are a proofessional perfoormance engineer",
+         tags: ["ai-agent","engineering"],
+          title: "performance tuner",
+           usageExample: "review the code and optimize it"}
+  )
+}

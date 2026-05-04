@@ -1,0 +1,115 @@
+I0501 19:19:40.218302   65591 load.go:31] Reloading schema and connectors...
+I0501 19:19:40.232315   65591 control.go:100] [projects/emulator/locations/emulator/services/skilled-4d231-service 7cd9] UpdateResources(): done
+Main schema: sources: schema/schema.gql [1090B] 
+Connector "example": sources: 
+E0501 19:19:40.242820   65591 load.go:95] Errors generating SDK: [connector "example"]: invalid Data Connect Connector no query found in connector
+I0501 19:19:40.244363   65591 collector.go:107] schema extensions wrote into "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [83799B] main/input.gql [16026B] main/relation.gql [6578B] main/query.gql [2404B] main/mutation.gql [6444B] main/implicit.gql [266B] 
+I0501 19:19:40.244419   65591 load.go:109] Finished reloading
+I0501 19:19:40.244644   65591 dev.go:104] Listening on address (HTTP + gRPC): 127.0.0.1:9399
+I0501 19:19:40.244820   65591 dev.go:104] Listening on address (HTTP + gRPC): [::1]:9399
+I0501 19:19:47.884826   65591 migrate.go:24] Running migration SQL:
+Step 1: CREATE EXTENSION IF NOT EXISTS "uuid-ossp"
+Step 2: CREATE TABLE "public"."user" ("clerk_id" text NOT NULL, "email" text NOT NULL, "image_url" text NULL, "username" text NULL, PRIMARY KEY ("clerk_id"))
+Step 3: CREATE UNIQUE INDEX "user_clerkId_uidx" ON "public"."user" ("clerk_id")
+Step 4: CREATE TABLE "public"."skill" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "author_clerk_id" text NOT NULL, "created_at" timestamptz NOT NULL, "description" text NOT NULL, "install_command" text NOT NULL, "prompt_config" text NOT NULL, "tags" text[] NOT NULL, "title" text NOT NULL, "usage_example" text NOT NULL, PRIMARY KEY ("id"), CONSTRAINT "skill_author_clerk_id_fkey" FOREIGN KEY ("author_clerk_id") REFERENCES "public"."user" ("clerk_id") ON DELETE CASCADE)
+Step 5: CREATE INDEX "skill_authorClerkId_idx" ON "public"."skill" ("author_clerk_id")
+I0501 19:19:48.070133   65591 control.go:100] [projects/emulator/locations/emulator/services/skilled-4d231-service 69a7] UpdateResources(): done
+Main schema: sources: schema/schema.gql [1090B] 
+Connector "example": sources: 
+I0501 19:19:48.078604   65591 configure_emulator.go:21] ConfigureEmulator successed
+Request: service_id:  "skilled-4d231-service"
+connection_string:  "postgres://127.0.0.1:5432/skilled-4d231-database?sslmode=disable"
+database:  "skilled-4d231-database"
+
+Response: 
+I0501 19:33:30.259746   65591 load.go:31] Reloading schema and connectors...
+I0501 19:33:30.458219   65591 control.go:100] [projects/emulator/locations/emulator/services/skilled-4d231-service 05f7] UpdateResources(): done
+Main schema: sources: schema/schema.gql [1090B] 
+Connector "example": sources: example/queries.gql [0B] 
+I0501 19:33:30.473313   65591 codegen.go:101] [connector "example" javascriptSdk] Generating sources into "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/src/dataconnect-generated"
+I0501 19:33:30.500050   65591 collector.go:107] schema extensions wrote into "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [83799B] main/relation.gql [6578B] main/query.gql [2404B] main/mutation.gql [6444B] main/implicit.gql [266B] main/input.gql [16026B] 
+I0501 19:33:30.506213   65591 collector.go:107] connector "example" javascriptSdk wrote into "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/src/dataconnect-generated"
+Generated sources: react/esm/index.esm.js [0B] react/README.md [5454B] index.d.ts [479B] esm/package.json [17B] package.json [853B] README.md [2876B] react/index.d.ts [228B] react/package.json [460B] react/esm/package.json [17B] esm/index.esm.js [293B] react/index.cjs.js [0B] .guides/usage.md [1318B] .guides/config.json [236B] .guides/setup.md [1682B] index.cjs.js [378B] 
+I0501 19:33:30.512374   65591 installsdk.go:86] Running command: /usr/local/bin/npm install file:src/dataconnect-generated
+E0501 19:34:03.424692   65591 installsdk.go:88] Failed to install package: exit status 1
+I0501 19:34:03.424832   65591 load.go:109] Finished reloading
+I0501 19:34:03.430162   65591 load.go:31] Reloading schema and connectors...
+W0501 19:34:03.787448   65591 control.go:74] [projects/emulator/locations/emulator/services/skilled-4d231-service d424] connector "example" has errors: example/mutations.gql:1:22: Unknown type "Skill_InsertInput".
+example/mutations.gql:2:22: Variable "$data" of type "Skill_InsertInput!" used in position expecting type "Skill_Data!".
+example/mutations.gql:5:34: Unknown type "Skill_UpdateInput".
+example/mutations.gql:6:31: Variable "$data" of type "Skill_UpdateInput!" used in position expecting type "Skill_Data!".
+example/mutations.gql:13:21: Unknown type "User_UpsertInput".
+example/mutations.gql:14:21: Variable "$data" of type "User_UpsertInput!" used in position expecting type "User_Data!".
+
+sources: example/mutations.gql [397B] example/queries.gql [425B] 
+I0501 19:34:03.787618   65591 control.go:100] [projects/emulator/locations/emulator/services/skilled-4d231-service d424] UpdateResources(): done
+Main schema: sources: schema/schema.gql [1090B] 
+Connector "example": sources: example/mutations.gql [397B] example/queries.gql [425B] 
+E0501 19:34:03.789020   65591 load.go:73] Could not load sources: 
+Errors: example/mutations.gql:1:22: Unknown type "Skill_InsertInput".
+example/mutations.gql:2:22: Variable "$data" of type "Skill_InsertInput!" used in position expecting type "Skill_Data!".
+example/mutations.gql:5:34: Unknown type "Skill_UpdateInput".
+example/mutations.gql:6:31: Variable "$data" of type "Skill_UpdateInput!" used in position expecting type "Skill_Data!".
+example/mutations.gql:13:21: Unknown type "User_UpsertInput".
+example/mutations.gql:14:21: Variable "$data" of type "User_UpsertInput!" used in position expecting type "User_Data!".
+I0501 19:34:03.792812   65591 collector.go:107] schema extensions wrote into "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/dataconnect/.dataconnect/schema"
+Generated sources: main/mutation.gql [6444B] prelude.gql [83799B] main/implicit.gql [266B] main/input.gql [16026B] main/relation.gql [6578B] main/query.gql [2404B] 
+I0501 19:34:03.793156   65591 load.go:74] Finished reloading
+E0501 19:34:10.259621   65591 watch.go:40] Failed to load config from "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/dataconnect": source path is not a directory: `/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/dataconnect/schema/schema.gql`
+E0501 19:34:20.260436   65591 watch.go:40] Failed to load config from "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/dataconnect": source path is not a directory: `/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/dataconnect/schema/schema.gql`
+E0501 19:34:30.260933   65591 watch.go:40] Failed to load config from "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/dataconnect": source path is not a directory: `/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/dataconnect/schema/schema.gql`
+I0501 19:35:00.261027   65591 load.go:31] Reloading schema and connectors...
+W0501 19:35:00.490440   65591 control.go:74] [projects/emulator/locations/emulator/services/skilled-4d231-service 512f] connector "example" has errors: example/mutations.gql:1:1: On $data: cannot use "Skill_Data" as a variable (please use one variable for each field instead, ex: `{foo: $foo}`)
+example/mutations.gql:5:1: On $data: cannot use "Skill_Data" as a variable (please use one variable for each field instead, ex: `{foo: $foo}`)
+example/mutations.gql:13:1: On $data: cannot use "User_Data" as a variable (please use one variable for each field instead, ex: `{foo: $foo}`)
+
+sources: example/mutations.gql [376B] example/queries.gql [425B] 
+I0501 19:35:00.490503   65591 control.go:100] [projects/emulator/locations/emulator/services/skilled-4d231-service 512f] UpdateResources(): done
+Main schema: sources: schema/schema.gql [1090B] 
+Connector "example": sources: example/mutations.gql [376B] example/queries.gql [425B] 
+E0501 19:35:00.491314   65591 load.go:73] Could not load sources: 
+Errors: example/mutations.gql:1:1: On $data: cannot use "Skill_Data" as a variable (please use one variable for each field instead, ex: `{foo: $foo}`)
+example/mutations.gql:5:1: On $data: cannot use "Skill_Data" as a variable (please use one variable for each field instead, ex: `{foo: $foo}`)
+example/mutations.gql:13:1: On $data: cannot use "User_Data" as a variable (please use one variable for each field instead, ex: `{foo: $foo}`)
+I0501 19:35:00.493896   65591 collector.go:107] schema extensions wrote into "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/dataconnect/.dataconnect/schema"
+Generated sources: main/implicit.gql [266B] main/input.gql [16026B] main/relation.gql [6578B] prelude.gql [83799B] main/query.gql [2404B] main/mutation.gql [6444B] 
+I0501 19:35:00.493937   65591 load.go:74] Finished reloading
+I0501 19:35:20.260892   65591 load.go:31] Reloading schema and connectors...
+I0501 19:35:20.555317   65591 control.go:100] [projects/emulator/locations/emulator/services/skilled-4d231-service c2a9] UpdateResources(): done
+Main schema: sources: schema/schema.gql [1090B] 
+Connector "example": sources: example/queries.gql [425B] example/mutations.gql [1159B] 
+I0501 19:35:20.582205   65591 codegen.go:101] [connector "example" javascriptSdk] Generating sources into "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/src/dataconnect-generated"
+I0501 19:35:20.613631   65591 collector.go:107] schema extensions wrote into "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/dataconnect/.dataconnect/schema"
+Generated sources: main/implicit.gql [266B] main/input.gql [16026B] main/relation.gql [6578B] main/query.gql [2404B] prelude.gql [83799B] main/mutation.gql [6444B] 
+I0501 19:35:20.624899   65591 collector.go:107] connector "example" javascriptSdk wrote into "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/src/dataconnect-generated"
+Generated sources: react/esm/package.json [17B] react/esm/index.esm.js [2280B] .guides/setup.md [1682B] .guides/config.json [236B] index.d.ts [5953B] esm/index.esm.js [3539B] react/index.cjs.js [2391B] react/README.md [37670B] index.cjs.js [3915B] README.md [30915B] react/index.d.ts [2852B] .guides/usage.md [2822B] esm/package.json [17B] package.json [853B] react/package.json [460B] 
+I0501 19:35:20.627592   65591 installsdk.go:86] Running command: /usr/local/bin/npm install file:src/dataconnect-generated
+E0501 19:35:46.302273   65591 installsdk.go:88] Failed to install package: exit status 1
+I0501 19:35:46.302391   65591 load.go:109] Finished reloading
+I0501 19:48:10.263962   65591 load.go:31] Reloading schema and connectors...
+E0501 19:48:10.267549   65591 load.go:73] Could not load sources: 
+Errors: schema/schema.gql:32:3: Unexpected Name "installCommand"
+I0501 19:48:10.269629   65591 collector.go:107] schema extensions wrote into "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/dataconnect/.dataconnect/schema"
+Generated sources: main/query.gql [2404B] main/mutation.gql [6444B] main/implicit.gql [266B] main/input.gql [16026B] main/relation.gql [6578B] prelude.gql [83799B] 
+I0501 19:48:10.269670   65591 load.go:74] Finished reloading
+I0501 19:49:00.263562   65591 load.go:31] Reloading schema and connectors...
+I0501 19:49:00.392935   65591 migrate.go:24] Running migration SQL:
+Step 1: CREATE TABLE "public"."users" ("clerk_id" text NOT NULL, "email" text NOT NULL, "image_url" text NULL, "username" text NULL, PRIMARY KEY ("clerk_id"))
+Step 2: CREATE UNIQUE INDEX "users_clerkId_uidx" ON "public"."users" ("clerk_id")
+Step 3: CREATE TABLE "public"."skills" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "author_clerk_id" text NOT NULL, "created_at" timestamptz NOT NULL, "description" text NOT NULL, "install_command" text NOT NULL, "prompt_config" text NOT NULL, "tags" text[] NOT NULL, "title" text NOT NULL, "usage_example" text NOT NULL, PRIMARY KEY ("id"), CONSTRAINT "skills_author_clerk_id_fkey" FOREIGN KEY ("author_clerk_id") REFERENCES "public"."users" ("clerk_id") ON DELETE CASCADE)
+Step 4: CREATE INDEX "skills_authorClerkId_idx" ON "public"."skills" ("author_clerk_id")
+Step 5: DROP TABLE "public"."skill"
+Step 6: DROP TABLE "public"."user"
+I0501 19:49:00.664968   65591 control.go:100] [projects/emulator/locations/emulator/services/skilled-4d231-service f839] UpdateResources(): done
+Main schema: sources: schema/schema.gql [1121B] 
+Connector "example": sources: example/mutations.gql [1159B] example/queries.gql [425B] 
+I0501 19:49:00.699297   65591 codegen.go:101] [connector "example" javascriptSdk] Generating sources into "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/src/dataconnect-generated"
+I0501 19:49:00.746787   65591 collector.go:107] schema extensions wrote into "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/dataconnect/.dataconnect/schema"
+Generated sources: prelude.gql [83799B] main/input.gql [16026B] main/relation.gql [6578B] main/query.gql [2404B] main/mutation.gql [6444B] main/implicit.gql [266B] 
+I0501 19:49:00.764868   65591 collector.go:107] connector "example" javascriptSdk wrote into "/Users/macbook/Desktop/JSM/TANSTACK-JSM-29-4-2026/skilld-me/skilld-me/src/dataconnect-generated"
+Generated sources: index.cjs.js [3915B] package.json [853B] .guides/usage.md [2822B] .guides/setup.md [1682B] esm/index.esm.js [3539B] esm/package.json [17B] README.md [30915B] react/index.d.ts [2852B] react/package.json [460B] react/README.md [37670B] .guides/config.json [236B] react/esm/package.json [17B] index.d.ts [5953B] react/index.cjs.js [2391B] react/esm/index.esm.js [2280B] 
+I0501 19:49:00.769784   65591 installsdk.go:86] Running command: /usr/local/bin/npm install file:src/dataconnect-generated
+E0501 19:49:31.034700   65591 installsdk.go:88] Failed to install package: exit status 1
+I0501 19:49:31.034841   65591 load.go:109] Finished reloading

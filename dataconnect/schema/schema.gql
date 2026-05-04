@@ -1,0 +1,36 @@
+# ####   2:42:05 *dataconnect/schema/schema.gql* : this is where u define ur DB structure 
+# 1. User Table 2:42:25
+type User @table(name: "users", key: "clerkId") {
+  clerkId: String! @unique
+  email: String!
+  username: String
+  imageUrl: String
+} 
+
+#2 The Skill Table : 2:43:00
+type Skill @table(name: "skills") {
+  id: UUID! @default(expr: "uuidV4()"),
+
+  # Relationship - who createed that specific skill-tied to the USER table
+  author: User!
+  
+  # Skill Content
+  title: String!
+  description: String!
+  tags: [String!]! #2:44:00 must be an array that contains strings
+  
+  # Technical data abt the skill 2:44:18
+  installCommand: String!
+  promptConfig: String!
+  usageExample: String!
+  
+  # Metadata
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+
+# with data connect u can can directly execute our code  -perform different mutations or query the DB
+# these 2 schema 2:45:08 u generated r onbly here locally 
+# firebase cloud isnt aware of them
+# we hve to deploy our schemas so data connect become aware of them
+
+# 2:45:28 lets create a sample of queries using vs code extensions and thend eploy them

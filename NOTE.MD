@@ -275,3 +275,111 @@ clerkMiddleware() grants you access to user authentication state throughout your
      2:25:16 POSTHOG MCP server lets ur AI AGNET queries ur POSTHOG data direclty 
         2:26:00 Events added
     @:32:45 commit at github
+
+
+# 2:32:55 FIreBASE :DATABASE 
+    https://console.firebase.google.com/u/0/
+    2:34:00 add the firebase variables
+
+## FIREBASE OFFERS 2:36:26 3 DB ENGINES
+    1- 2:36:36 REALTIME DB
+    2- cloud firestore no sql document sore similar to mongodb 2:37:00
+    3- FireBase Data connect 2:27:27
+        uses cloud SQl based on POSTGRES and allows for relational mapping 
+        we ll be using it within this course
+        2:39:07 *npm i -g firebase-tools* :install the firebase cli
+            firebase login
+
+            already existing projects on FIREBASE
+        Select a default Firebase project for this directory:
+-            instagram-tut-3842a (Instagram-tut)
+-            instagram-tut-advance (Instagram-tut-advance)
+-            prepwisevbe (PrepWiseVBE)
+-            skilled-4d231 (Skilled)
+
+### 2:40:25 install firebase data/SQL connect extension
+    now we re ready to start modelling the data for our app
+        -identify the entities of the app ur developping 2:40:50
+            1-person
+            2-actual skill: core asset of the app 2:41:00
+        -relationships : between the entities 
+            one to many: one user can create many diff skills
+            one skills can only belong to one user
+####   2:42:05 *dataconnect/schema/schema.gql* : this is where u define ur DB structure
+
+                mkdir -p ~/.cache/firebase
+                sudo chown -R macbook ~/.cache/firebase
+                chmod -R u+rwX ~/.cache/firebase
+
+                firebase emulators:start --project skilled-4d231
+                # or
+                npx -y firebase-tools@latest emulators:start --project skilled-4d231
+
+                npx firebase-tools@latest dataconnect:sql:migrate
+                firebase deploy
+
+#####    2:45:00 by pressing on add data/ read data on both user and skill tables
+             @dataconnect/schema/schema.gql , files are generated:
+-        we add the skill insert mutation: dataconnect/Skill_insert.gql
+-        reading the skill table : dataconnect/Skill_read.gql
+-        we add the user insert mutation:  dataconnect/User_insert.gql
+-        reading the user table :dataconnect/User_read.gql
+
+##### 2:46:10 after those files creation, we run the. deployment command 
+-   npx -y firebase-tools@latest deploy --only dataconnect
+    
+
+-    2:46:40 firebase data connect 2:46:40 @ .gitignore :reduce the number of files to push opver to githubs
+
+- 2:47:00 check the console schema
+https://console.firebase.google.com/u/0/project/skilled-4d231/dataconnect/locations/us-east4/services/skilled-4d231-service/schema
+
+Clerk: 
+https://dashboard.clerk.com/apps/app_3D83DAF5aCsaoOUTU5NhZLgOWnJ/instances/ins_3D83DGzUvLLiCgCeg2juEuRm4BJ/users
+users/ahmad wehbe/copy the json text file 2:47:30 
+
+*(RUNNING MUTATIONS)*
+2:48:00 add the user manually using the dataconnect/User_insert.gql
+    =>run production project
+2:50:00 add the skills manually using the dataconnect/Skill_insert.gql
+
+*2:50:26 RUN QUERIES DIRECTLY FROM DB*
+- dataconnect/User_read.gql: U WILL BE ABLE TO DIRECTLY QUERY UR DB
+- dataconnect/Skill_read.gql 2:50:50 U CAN SEE THE SKILLS THAT HVE BEEN ADDED TO OUR DB
+ 
+*See data in. the web console 2:50:58 @*
+    https://console.firebase.google.com/u/0/project/skilled-4d231/dataconnect/locations/us-east4/services/skilled-4d231-service/data
+
+*Schema*
+    https://console.firebase.google.com/u/0/project/skilled-4d231/dataconnect/locations/us-east4/services/skilled-4d231-service/schema
+
+*RECAP 2:51:20 we essentially created the data struct of our entire app*
+    
+### 2:51:35 use the firebase SDK to fetch data
+        Write a couple of queries and call tyhem on the UI side to display to dispaly real data and remove the dummy data
+            =>head to our code base
+-                dataconnect/example/connector.yaml
+                =>rename the folder to *connectors *
+
+       *queries creation* :
+            GetSkills() 2:52:15
+-        2:54:55  *dataconnect/dataconnect.yaml* 
+    and *point it* to our new folder dataconnect/connectors/queries.gql
+            connectorDirs: ["./connectors"] 2:55:10
+- *Deploy of this query*  2:55:16
+    firebase login                                                      
+        Already logged in as ahmad.vbe@gmail.com
+
+    firebase deploy --only dataconnect
+       *=>when u deploy ur actually registering ur .gql files on the firebase server* 
+    
+-    *2:56:00 TS sdk* 
+    firebase dataconnect:sdk:generate
+        =>defines the types and get the type for the full queries themselves
+
+- 2:56:50 *firebase config file*
+    src/lib/firebase.ts
+    2:59:25 now we re ready to define a tanstack server func that fetch the skills form the DB
+        src/routes/index.tsx 2:59:40
+
+3:07:55 Github push

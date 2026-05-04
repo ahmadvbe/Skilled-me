@@ -10,11 +10,11 @@ import {
 import { usePostHog } from "posthog-js/react";
 import { useState } from "react";
 
-// import type { GetSkillsData } from "#/dataconnect-generated";
+ import type { GetSkillsData } from "#/dataconnect-generated";
 
 //##        1:48:38 src/components/SkillCard.tsx
-
-// type SkillCardProps = GetSkillsData["skills"][number];
+//3:04:20
+ type SkillCardProps = GetSkillsData["skills"][number];
 
 const SkillCard = ({
 	createdAt,
@@ -22,14 +22,14 @@ const SkillCard = ({
 	installCommand,
 	tags,
 	title,
-	// author,
-}: SkillRecord
-//SkillCardProps
+	author, //user that we joint tot he skills table
+}: //SkillRecord
+SkillCardProps
 ) => {
 	const [copied, setCopied] = useState(false); //indication of successfull copy process 2:01:00
 	const posthog = usePostHog();
 
-	const category = tags[0] ?? "General";
+	const category = tags[0] ?? "General"; //3:05:10
 
 	const handleCopy = async () => {
 		try {
@@ -71,19 +71,19 @@ const SkillCard = ({
 				<div className="meta">
 					<div className="author">
 						<img
-							src=//{author.imageUrl 
-								//||
+							src={author.imageUrl 
+								||
 								 "/logo512.png"
-								//}
-							alt=//{`${author.username} 
-							'avatar'
-							//`}
+								}
+							alt={`${author.username} 
+							avatar
+							`}
 							className="avatar"
 						/>
 						<div className="author-copy">
 							<p>
-								{/* {author.username} */}
-								Ahmad
+								{author.username}
+								
 							</p>
 							<p>
 								{createdAt //1:57:13 2:10:52 coderabbit fix
@@ -135,7 +135,7 @@ const SkillCard = ({
 						<div //2:03:10
 							className="comments">
 							<MessageSquare size={14} />
-							{/* <span>{author.email ? 1 : 0}</span> */}
+							<span>{author.email ? 1 : 0}</span>
 						</div>
 					</div>
 

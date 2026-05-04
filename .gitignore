@@ -1,3 +1,4 @@
+# reduce the number of files to push opver to githubs
 node_modules
 .DS_Store
 dist
@@ -11,3 +12,7 @@ dist-ssr
 .vinxi
 __unconfig*
 todos.json
+
+# firebase data connect 2:46:40
+.firebase
+dataconnect/.dataconnect
