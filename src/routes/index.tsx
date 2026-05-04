@@ -4,34 +4,40 @@ import { Terminal } from "lucide-react";
 
 // import { usePostHog } from "posthog-js/react";
 import SkillCard from "#/components/SkillCard";
+import { getSkills } from "#/dataconnect-generated";
 import { dummySkills } from "#/lib/dummy-skills";
+import { dataConnect } from "#/lib/firebase";
 
-// import { getSkills } from "#/dataconnect-generated";
-// import { dataConnect } from "#/lib/firebase";
-
-const getSkillsFn = createServerFn({ method: "GET" }).handler(async () => {
-	// try {
-	// 	const { data } = await getSkills(dataConnect, {
-	// 		searchTerm: "",
-	// 		limit: 10,
-	// 	});
-
-	// 	return data.skills;
-	// } catch (error) {
-	// 	console.error(error);
-	// 	return [];
-	// }
+// - 2:56:50 *firebase config file*
+//     src/lib/firebase.ts
+//     2:59:25 now we re ready to define a tanstack server func that fetch the skills form the DB
+//         src/routes/index.tsx 2:59:40  
+const getSkillsFn = createServerFn(
+		{ method: "GET" })
+		.handler(async () => { //3:00:05
+	try {
+		const { data } = await getSkills(dataConnect, { //call the data connect instance from firebase config.ts file
+			searchTerm: "", //fetch all the skills
+			limit: 10,
+		});
+			console.log("data",data)
+		return data.skills; //return the data back
+	} catch (error) {
+		console.error(error);
+		return []; //we werent been able to fetch the skills
+	}
 });
 
 export const Route = createFileRoute("/")({
 	component: App,
-	loader: () => getSkillsFn(),
+	loader: () => getSkillsFn(), //3:01:10 popyulate our page with the above data
 });
 
 function App() {
 	// const posthog = usePostHog();
 
-	// const skills = Route.useLoaderData();
+	//to consume the fetched data using the tanstack server fn 3:01:30
+	const skills = Route.useLoaderData(); //use this data instad of our dummy data 3:01:45
 
 	return (
 		<div  //1:41:25
@@ -90,7 +96,7 @@ function App() {
 
 				<div //1:49"04 consume the skillcard component created and map over it 
 					>
-					{/* {skills.length > 0 ? ( //1:46:26
+					{skills.length > 0 ? ( //1:46:26
 						<div className="skills-grid">
 							{skills.map((skill) => (
 								<SkillCard key={skill.id} {...skill} />
@@ -98,19 +104,19 @@ function App() {
 						</div>
 					) : (
 						<p>No skills have been created yet.</p>
-					)} */}
-						{dummySkills.length > 0 ? ( //1:46:26 1:51:16
+					)}
+						{/* {dummySkills.length > 0 ? ( //1:46:26 1:51:16
 						<div className="skills-grid">
 							{dummySkills.map((skill) => (
 								<SkillCard 
 									key={skill.id} 
 									{...skill}  //1:51:56 spread out all of the other skills properties
 									/>
-							))}
-						</div>
+							))} */}
+						{/* </div>
 					) : (
-						<p>No skills have been created yet.</p>
-					)}
+						<p>No skills have been created yet.</p> */}
+					{/* )} */}
 				</div>
 			</section>
 		</div>

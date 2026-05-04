@@ -1,0 +1,67 @@
+# 2:52:00 
+
+query ListSkills @auth(level: PUBLIC) {
+  skills(orderBy: [{createdAt: DESC}]) {
+    id
+    title
+    description
+    tags
+    author {
+      username
+      imageUrl
+    }
+    createdAt
+  }
+}
+
+#2:52:15
+query GetSkill($id: UUID!) @auth(level: PUBLIC) {
+  skill(id: $id) {
+    id
+    title
+    description
+    tags
+    installCommand
+    promptConfig
+    usageExample
+    author {
+      username
+      imageUrl
+    }
+    createdAt
+  }
+}
+
+query GetSkills($searchTerm: String = "", $limit: Int = 10)  @auth(level: PUBLIC insecureReason:"Skills should be visible to everyone")
+#data connect block all access by default =>turn on the auth
+{
+  skills( #2:53:10
+    where: {
+      _or: [
+        { title: { contains: $searchTerm }}
+        { description: { contains: $searchTerm }}
+      ]
+    },
+    orderBy: [
+      {
+        createdAt: DESC
+      }
+    ],
+    limit: $limit 
+  ) {# which property of a skill do we wana actually return 
+    id 
+    title 
+    description 
+    tags 
+    createdAt 
+    installCommand
+    #join 2:54:#0
+    author {
+      username
+      imageUrl
+      clerkId
+      email
+    }
+
+  }
+}
